@@ -28,13 +28,32 @@ def set_bg_and_css(image_file):
         .stSelectbox > div > div {{
             background-color: transparent;
             color: #000080;
-            border: 2px solid #e50914;
+            border: 2px solid;
             border-radius: 5px;
         }}
-        input[type="text"]{{
-            background-color: white;
+        .stSelectbox > div > div input {{
+            color:#000080;
+        }}
+        input[type="text"] {{
+            background-color:  #f0f8ff;
             color: #000080;
-            border: 2px solid #e50914;
+            border: 2px solid;
+            border-radius: 7px;
+        }}
+        .stButton > button {{
+            background-color: navy;
+            color: white;
+            border-radius: 10px;
+            border: none;
+            padding: 10px 20px;
+        }}
+        .stSpinner {{
+            color: #000080 !important;
+        }}
+        .stAlert > div {{
+            background-color: #8aecff;
+            color: navy !important;
+            border: 1px solid white;
             border-radius: 5px;
         }}
         </style>
