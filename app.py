@@ -2,6 +2,45 @@ import streamlit as st
 import requests
 from bs4 import BeautifulSoup
 import urllib.parse
+import base64
+
+def get_base64_image(image_file):
+    with open(image_file, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
+def set_bg_and_css(image_file):
+    base64_image = get_base64_image(image_file)
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("data:image/png;base64,{base64_image}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }}
+        h1 {{
+            color: navy !important;
+        }}
+        label {{
+            color: navy !important;
+        }}
+        .stSelectbox > div > div {{
+            background-color: transparent;
+            color: #000080;
+            border: 2px solid #e50914;
+            border-radius: 5px;
+        }}
+        input[type="text"]{{
+            background-color: white;
+            color: #000080;
+            border: 2px solid #e50914;
+            border-radius: 5px;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
 def doct_prof_cnt(location, specialization):
     encoded_location = urllib.parse.quote(location)
@@ -27,9 +66,10 @@ def doct_prof_cnt(location, specialization):
             return None
     return profiles_count
 
+set_bg_and_css("doc.jpg")
 
 st.title("Find Doctor")
-location = st.text_input("Enter your Location")
+location = st.text_input("Enter your Location (Must be some city/towns situated in INDIA)")
 specializations = ["Dentist", "Gynecologist/obstetrician", "General Physician", "Dermatologist", "Pediatrician", "Cardiologist",
                    "Cardiac Surgeon", "Urologist", "Ear-nose-throat (ent) Specialist"]
 specialization = st.selectbox("Select the Specialization: ", specializations)
